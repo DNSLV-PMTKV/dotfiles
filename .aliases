@@ -1,0 +1,7 @@
+alias vim="nvim"
+
+# Django
+alias pmr="python manage.py runserver"
+alias pmmm="python manage.py makemigrations"
+alias pmm="python manage.py migrate"
+alias pms="python manage.py shell_plus"
