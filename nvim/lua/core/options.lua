@@ -22,4 +22,3 @@ opt.signcolumn = 'yes' -- always show the sign column
 opt.wrap = false -- display lines as one long line
 opt.scrolloff = 7 -- start scrolling when there are 7 lines left to end of view
 opt.showmode = false -- disable mode in comand line
-

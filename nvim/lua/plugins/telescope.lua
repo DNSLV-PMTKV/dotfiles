@@ -10,7 +10,7 @@ telescope.setup {
     prompt_prefix = ' ',
     selection_caret = ' ',
     path_display = { 'smart' },
-    file_ignore_patterns = { '__pycache__', 'htmlcov', 'media', 'static', 'node_modules' },
+    file_ignore_patterns = { '__pycache__', 'htmlcov', 'media', 'static', 'node_modules', 'assets', 'dist' },
 
     mappings = {
       i = {

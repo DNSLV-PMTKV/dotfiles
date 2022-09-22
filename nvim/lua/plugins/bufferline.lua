@@ -6,8 +6,9 @@ end
 bufferline.setup {
   options = {
     mode = 'tabs',
-    offsets = { { filetype = 'NvimTree', text = '', padding = 1 } },
+    offsets = { { filetype = 'NvimTree', text = 'Explorer', padding = 1 } },
     show_buffer_icons = true,
+    modified_icon = '',
     show_buffer_close_icons = false,
     show_close_icon = false,
     show_tab_indicators = true,
@@ -28,11 +29,12 @@ bufferline.setup {
       bg = '#002b36',
     },
     buffer_selected = {
+      italic = false,
       fg = '#fdf6e3',
       bold = true,
     },
     fill = {
-      bg = '#073642',
+      bg = '#21252b',
     },
   },
 }
