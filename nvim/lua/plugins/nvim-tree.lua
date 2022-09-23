@@ -12,6 +12,12 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
   open_on_setup = true,
+  open_on_tab = true,
+  open_on_setup_file = true,
+  hijack_directories = {
+    enable = false,
+  },
+  hijack_cursor = true,
   update_focused_file = {
     enable = true,
     update_cwd = true,
@@ -54,6 +60,11 @@ nvim_tree.setup {
       error = '',
     },
   },
+  git = {
+    enable = true,
+    ignore = true,
+    -- timeout = 500,
+  },
   view = {
     width = 30,
     height = 30,
@@ -64,6 +75,11 @@ nvim_tree.setup {
         { key = 'h', cb = tree_cb 'close_node' },
         { key = 'v', cb = tree_cb 'vsplit' },
       },
+    },
+  },
+  actions = {
+    open_file = {
+      quit_on_open = false,
     },
   },
 }

@@ -15,6 +15,8 @@ bufferline.setup {
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     enforce_regular_tabs = true,
     always_show_bufferline = true,
+    tab_size = 21,
+    separator_style = 'thin',
   },
   highlights = {
     separator = {
