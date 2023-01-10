@@ -42,9 +42,13 @@ keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>f", ":Telescope live_grep<CR>", opts)
 
 -- Gitsign
-keymap("n", "<leader>gb", ":Gitsign toggle_current_line_blame<CR>", opts)
-keymap("n", "<leader>gp", ":Gitsign preview_hunk<CR>", opts)
-keymap("n", "<leader>gadd", ":Gitsign stage_hunk<CR>", opts)
+keymap("n", "<leader>hb", ":Gitsign toggle_current_line_blame<CR>", opts)
+keymap("n", "<leader>hp", ":Gitsign preview_hunk<CR>", opts)
+keymap("n", "<leader>hd", ":Gitsign diffthis<CR>", opts)
+keymap("n", "<leader>hs", ":Gitsign stage_hunk<CR>", opts)
+keymap("v", "<leader>hs", ":Gitsign stage_hunk<CR>", opts)
+keymap("n", "<leader>hr", ":Gitsign reset_hunk<CR>", opts)
+keymap("v", "<leader>hr", ":Gitsign reset_hunk<CR>", opts)
 
 -- Clear highlights
 keymap("n", "<leader>h", ":noh<CR>", opts)

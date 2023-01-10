@@ -17,7 +17,7 @@ local format_on_save = function(client, bufnr)
 			group = augroup,
 			buffer = bufnr,
 			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr })
+				vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 2000 })
 				-- vim.lsp.buf.formatting_sync({ timeout_ms = 2000})
 			end,
 		})
@@ -33,8 +33,10 @@ null_ls.setup({
 		-- lua
 		formatting.stylua,
 		-- python
-		formatting.isort,
+		-- formatting.isort,
 		formatting.black.with({ extra_args = { "--fast" } }),
 		diagnostics.flake8,
+    -- eslint
+    diagnostics.eslint
 	},
 })

@@ -13,7 +13,7 @@ M.setup = function()
 	end
 
 	local config = {
-		-- virtual_text = false,
+		virtual_text = { prefix = "" },
 		-- show signs
 		signs = {
 			active = signs,

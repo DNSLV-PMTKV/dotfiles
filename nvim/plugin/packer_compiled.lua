@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/dani/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bufdelete.nvim"] = {
+    loaded = true,
+    path = "/home/dani/.local/share/nvim/site/pack/packer/start/bufdelete.nvim",
+    url = "https://github.com/famiu/bufdelete.nvim"
+  },
   ["bufferline.nvim"] = {
     loaded = true,
     path = "/home/dani/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
