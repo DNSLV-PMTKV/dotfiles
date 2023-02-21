@@ -43,10 +43,9 @@ keymap("n", "<leader>f", ":Telescope live_grep<CR>", opts)
 
 -- Gitsign
 keymap("n", "<leader>hb", ":Gitsign toggle_current_line_blame<CR>", opts)
+keymap("n", "<leader>hB", ":Gitsign blame_line<CR>", opts)
 keymap("n", "<leader>hp", ":Gitsign preview_hunk<CR>", opts)
 keymap("n", "<leader>hd", ":Gitsign diffthis<CR>", opts)
-keymap("n", "<leader>hs", ":Gitsign stage_hunk<CR>", opts)
-keymap("v", "<leader>hs", ":Gitsign stage_hunk<CR>", opts)
 keymap("n", "<leader>hr", ":Gitsign reset_hunk<CR>", opts)
 keymap("v", "<leader>hr", ":Gitsign reset_hunk<CR>", opts)
 
@@ -58,5 +57,17 @@ keymap("n", "<C-\\>", "<Esc>:vs<CR>", opts)
 keymap("n", "gv", ":vs | lua vim.lsp.buf.definition()<CR>", opts)
 keymap("n", "gh", ":split | lua vim.lsp.buf.definition()<CR>", opts)
 
+-- better indenting
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
 -- Format document
 keymap("n", "<C-f>", ":lua vim.lsp.buf.format { async = true }<CR>", opts)
+
+
+-- Delete whole word
+keymap('i', '<C-H>', '<C-W>', opts)
+
+-- Paste
+keymap("n", "p", "pgvy", opts)
+keymap("v", "p", "pgvy", opts)

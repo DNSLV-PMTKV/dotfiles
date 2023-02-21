@@ -11,33 +11,19 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup({
-	open_on_setup = true,
 	open_on_tab = true,
-	open_on_setup_file = true,
 	hijack_directories = {
 		enable = false,
 	},
 	hijack_cursor = true,
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
 	},
 	renderer = {
 		root_folder_modifier = ":t",
 		icons = {
+			webdev_colors = true,
 			glyphs = {
-				default = "",
-				symlink = "",
-				folder = {
-					arrow_open = "",
-					arrow_closed = "",
-					default = "",
-					open = "",
-					empty = "",
-					empty_open = "",
-					symlink = "",
-					symlink_open = "",
-				},
 				git = {
 					unstaged = "",
 					staged = "S",
@@ -66,6 +52,7 @@ nvim_tree.setup({
 		-- timeout = 500,
 	},
 	view = {
+		centralize_selection = true,
 		width = 42,
 		side = "left",
 		mappings = {
@@ -76,6 +63,9 @@ nvim_tree.setup({
 		},
 	},
 	actions = {
+		change_dir = {
+			enable = false,
+		},
 		open_file = {
 			quit_on_open = false,
 		},
@@ -84,3 +74,5 @@ nvim_tree.setup({
 		custom = { "node_modules", "__pycache__" },
 	},
 })
+
+nvim_tree.open()

@@ -40,6 +40,7 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
+  use({"xiyaowong/nvim-transparent"})
 	-- Have packer manage itself
 	use({ "wbthomason/packer.nvim" })
 
