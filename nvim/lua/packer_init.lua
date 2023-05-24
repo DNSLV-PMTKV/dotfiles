@@ -40,7 +40,6 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-  use({"xiyaowong/nvim-transparent"})
 	-- Have packer manage itself
 	use({ "wbthomason/packer.nvim" })
 
@@ -52,6 +51,7 @@ return packer.startup(function(use)
 	use({ "akinsho/bufferline.nvim" })
 	use({ "lukas-reineke/indent-blankline.nvim" })
 	use({ "RRethy/vim-illuminate" })
+  use({ "github/copilot.vim" })
 
 	-- Theme
 	use({ "navarasu/onedark.nvim" })

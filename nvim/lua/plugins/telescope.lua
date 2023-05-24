@@ -9,14 +9,14 @@ telescope.setup({
 	defaults = {
 		prompt_prefix = " ",
 		selection_caret = " ",
-		path_display = { "smart" },
+		path_display = { "absolute" },
 		file_ignore_patterns = { "__pycache__", "htmlcov", "media", "static", "node_modules", "assets", "dist" },
-    sorting_strategy = "ascending",
-    layout_config = {
-      horizontal = {
-        prompt_position = 'top'
-      }
-    },
+		sorting_strategy = "ascending",
+		layout_config = {
+			horizontal = {
+				prompt_position = "top",
+			},
+		},
 		mappings = {
 			i = {
 				["<Down>"] = actions.cycle_history_next,

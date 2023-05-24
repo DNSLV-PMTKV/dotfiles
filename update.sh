@@ -5,8 +5,8 @@ function usage {
 Usage: update.sh -mode <mode>
 
 mode options:
-    - git
-    - local
+    - git - Copies local config to git
+    - local - Copies git config to local
 EOF
     exit 1
 }
@@ -33,11 +33,11 @@ fi
 FLAG=$2
 
 if [ $FLAG = "git" ]; then
-    echo "Copying to local config to git.."
+    echo "Copying local config to git.."
     copy_to_git;
     echo "Done!"
 elif [ $FLAG = "local" ]; then
-    echo "Copying to git config to local.."
+    echo "Copying git config to local.."
     copy_to_local;
     echo "Done!"
 else

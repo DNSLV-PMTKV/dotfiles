@@ -13,12 +13,13 @@ M.setup = function()
 	end
 
 	local config = {
-		virtual_text = { prefix = "" },
+		-- virtual_text = { enable = false, prefix = "" },
+		virtual_text = false,
 		-- show signs
 		signs = {
 			active = signs,
 		},
-		update_in_insert = true,
+		update_in_insert = false,
 		underline = true,
 		severity_sort = true,
 		float = {
@@ -36,6 +37,7 @@ M.setup = function()
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 		width = 60,
+    focusable = false
 	})
 
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
@@ -66,22 +68,15 @@ local function lsp_keymaps(bufnr)
 	-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-	vim.api.nvim_buf_set_keymap(
-		bufnr,
-		"n",
-		"gl",
-		'<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>',
-		opts
-	)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format{async=true}' ]])
+	-- vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format{async=true}' ]])
 end
 
 M.on_attach = function(client, bufnr)
-	if client.name == "tsserver" or client.name == "sumneko_lua" then
-		client.server_capabilities.document_formatting = false
-	end
+	-- if client.name == "tsserver" or client.name == "sumneko_lua" then
+	-- 	client.server_capabilities.document_formatting = false
+	-- end
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end
@@ -93,6 +88,10 @@ if not status_ok then
 	return
 end
 
+-- vim.o.updatetime = 500
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 return M
+

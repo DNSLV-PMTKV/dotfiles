@@ -64,10 +64,9 @@ keymap("v", ">", ">gv", opts)
 -- Format document
 keymap("n", "<C-f>", ":lua vim.lsp.buf.format { async = true }<CR>", opts)
 
-
 -- Delete whole word
-keymap('i', '<C-H>', '<C-W>', opts)
+keymap("i", "<C-H>", "<C-W>", opts)
 
 -- Paste
-keymap("n", "p", "pgvy", opts)
 keymap("v", "p", "pgvy", opts)
+
