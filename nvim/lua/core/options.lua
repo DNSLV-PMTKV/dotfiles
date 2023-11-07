@@ -25,5 +25,5 @@ opt.showmode = false -- disable mode in comand line
 opt.autoindent = true -- uses the indent from the previous line.
 opt.smartindent = true
 opt.foldlevel = 99
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- opt.foldmethod = "expr"
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"

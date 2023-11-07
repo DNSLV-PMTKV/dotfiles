@@ -38,8 +38,12 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
+-- keymap("n", "<C-p>", ":Telescope find_files hidden=true no_ignore=true<CR>", opts)
 keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>f", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>r", ":Telescope resume<CR>", opts)
+keymap("n", "<leader>b", ":Telescope buffers <CR>", opts)
+keymap("n", "<leader>/", ":Telescope current_buffer_fuzzy_find <CR>", opts)
 
 -- Gitsign
 keymap("n", "<leader>hb", ":Gitsign toggle_current_line_blame<CR>", opts)
@@ -50,7 +54,7 @@ keymap("n", "<leader>hr", ":Gitsign reset_hunk<CR>", opts)
 keymap("v", "<leader>hr", ":Gitsign reset_hunk<CR>", opts)
 
 -- Clear highlights
-keymap("n", "<leader>h", ":noh<CR>", opts)
+keymap("n", "<Esc>", ":noh <CR>", opts)
 
 -- Vertical split
 keymap("n", "<C-\\>", "<Esc>:vs<CR>", opts)
@@ -69,4 +73,7 @@ keymap("i", "<C-H>", "<C-W>", opts)
 
 -- Paste
 keymap("v", "p", "pgvy", opts)
+-- keymap("n", "p", "pgvy", opts)
+
+keymap("n", "C-S-r", ":source $MYVIMRC<CR>", opts)
 

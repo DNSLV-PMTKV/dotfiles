@@ -70,11 +70,8 @@ return packer.startup(function(use)
 	use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
 	use({ "hrsh7th/cmp-buffer" }) -- buffer completions
 	use({ "hrsh7th/cmp-path" }) -- path completions
-	use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
 	use({ "hrsh7th/cmp-nvim-lsp" })
 	use({ "hrsh7th/cmp-nvim-lua" })
-	use({ "L3MON4D3/LuaSnip" }) --snippet engine
-	use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
 
 	-- LSP
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -83,6 +80,7 @@ return packer.startup(function(use)
 
 	use({ "mg979/vim-visual-multi" }) -- multi-cursor
 	use("famiu/bufdelete.nvim")
+  use({"dstein64/vim-startuptime"})
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

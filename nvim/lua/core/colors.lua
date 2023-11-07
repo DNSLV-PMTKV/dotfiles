@@ -1,13 +1,13 @@
-local status_ok, color_scheme = pcall(require, 'onedark')
+local status_ok, onedark = pcall(require, 'onedark')
 if not status_ok then
   return
 end
 
 -- OneDark styles: dark, darker, cool, deep, warm, warmer, light
-require('onedark').setup {
+onedark.setup {
   style = 'dark',
   code_style = {
     comments = 'none',
   },
 }
-color_scheme.load()
+onedark.load()

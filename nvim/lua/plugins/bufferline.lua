@@ -16,6 +16,7 @@ bufferline.setup({
 		always_show_bufferline = true,
 		diagnostics = "nvim_lsp",
 		diagnostics_update_in_insert = true,
+    sort_by = "insert_at_end"
 		-- tab_size = 21,
 		-- separator_style = "thin",
 	},

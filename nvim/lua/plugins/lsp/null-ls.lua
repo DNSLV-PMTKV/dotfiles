@@ -30,7 +30,7 @@ null_ls.setup({
 		-- js/ts
 		-- formatting.prettierd,
 		formatting.eslint_d,
-		diagnostics.eslint,
+		diagnostics.eslint_d,
 		-- lua
 		formatting.stylua,
 		-- python

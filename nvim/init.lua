@@ -6,7 +6,7 @@ require("packer_init")
 
 require("plugins/cmp")
 require("plugins/lsp")
-require("plugins/nvim-tree")
+require("plugins/nvim-tree-cfg")
 require("plugins/telescope")
 require("plugins/treesitter")
 require("plugins/bufferline")

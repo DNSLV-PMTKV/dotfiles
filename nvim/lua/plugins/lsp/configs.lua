@@ -5,7 +5,7 @@ end
 
 local lspconfig = require 'lspconfig'
 
-local servers = { 'lua_ls', 'jedi_language_server', 'tsserver' }
+local servers = { 'lua_ls', 'pyright', 'tsserver' }
 
 lsp_installer.setup {
   ensure_installed = servers,
