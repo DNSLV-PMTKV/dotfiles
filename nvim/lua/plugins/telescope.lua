@@ -1,20 +1,33 @@
-local status_ok, telescope = pcall(require, "telescope")
+local status_ok, telescope = pcall(require, 'telescope')
 if not status_ok then
-	return
+  return
 end
 
-local actions = require("telescope.actions")
+local actions = require 'telescope.actions'
 
-telescope.setup({
-	defaults = {
-		prompt_prefix = " ",
-		selection_caret = " ",
-		path_display = { "absolute" },
-		file_ignore_patterns = { "__pycache__", "htmlcov", "media", "static", "node_modules", "assets", "dist", ".git", ".pytest_cache"},
-		sorting_strategy = "ascending",
+telescope.setup {
+  defaults = {
+    prompt_prefix = ' ',
+    selection_caret = ' ',
+    path_display = { 'absolute' },
+    file_ignore_patterns = {
+      '__pycache__',
+      'htmlcov',
+      'media',
+      'static',
+      'node_modules',
+      'assets',
+      'dist',
+      '.git',
+      '.pytest_cache',
+      'android',
+      'ios',
+      '.expo'
+    },
+    sorting_strategy = 'ascending',
     layout_config = {
       horizontal = {
-        prompt_position = "top",
+        prompt_position = 'top',
       },
       vertical = {
         mirror = false,
@@ -24,6 +37,6 @@ telescope.setup({
       preview_cutoff = 120,
     },
     color_devicons = true,
-    set_env = { ["COLORTERM"] = "truecolor" },
-	},
-})
+    set_env = { ['COLORTERM'] = 'truecolor' },
+  },
+}

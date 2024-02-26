@@ -4,7 +4,8 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = {'python', 'gitcommit', 'git_config', 'html', 'css', 'javascript', 'lua', 'typescript', 'tsx'}, -- one of "all" or a list of languages
+  -- ensure_installed = {'python', 'gitcommit', 'git_config', 'html', 'css', 'javascript', 'lua', 'typescript', 'tsx'}, -- one of "all" or a list of languages
+  ensure_installed = 'all',
   ignore_install = { '' }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
