@@ -1,18 +1,38 @@
-local status_ok, configs = pcall(require, 'nvim-treesitter.configs')
-if not status_ok then
-  return
-end
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    dependencies = {
+      'windwp/nvim-ts-autotag',
+      'axelvc/template-string.nvim',
+    },
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = 'all',
 
-configs.setup {
-  -- ensure_installed = {'python', 'gitcommit', 'git_config', 'html', 'css', 'javascript', 'lua', 'typescript', 'tsx'}, -- one of "all" or a list of languages
-  ensure_installed = 'all',
-  ignore_install = { '' }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = { 'css' }, -- list of language that will be disabled
+        sync_install = false,
+
+        auto_install = true,
+
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        autotag = {
+          enable = true,
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<enter>',
+            node_incremental = '<enter>',
+            scope_incremental = false,
+            node_decremental = '<bs>',
+          },
+        },
+      }
+
+      require('template-string').setup {}
+    end,
   },
-  autopairs = {
-    enable = true,
-  },
-  indent = { enable = true, disable = { 'css' } },
 }

@@ -1,18 +1,19 @@
-require 'core/options'
-require 'core/keymaps'
-require 'core/colors'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
-require 'packer_init'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
 
-require 'plugins/cmp'
-require 'plugins/lsp'
-require 'plugins/nvim-tree-cfg'
-require 'plugins/telescope'
-require 'plugins/treesitter'
-require 'plugins/bufferline'
-require 'plugins/lualine'
-require 'plugins/indent-line'
-require 'plugins/gitsigns'
-require 'plugins/comment'
-require 'plugins/autopairs'
-require 'plugins/copilot'
+vim.opt.rtp:prepend(lazypath)
+
+require 'base'
+require 'keymap'
+
+require('lazy').setup 'plugins'
