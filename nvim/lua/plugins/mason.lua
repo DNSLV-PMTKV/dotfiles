@@ -14,13 +14,28 @@ return {
         },
       },
     }
-    require('mason-lspconfig').setup {}
+
+    require('mason-lspconfig').setup {
+      -- list of servers for mason to install
+      ensure_installed = {
+        'ts_ls',
+        'html',
+        'cssls',
+        'tailwindcss',
+        'lua_ls',
+        'pyright',
+      },
+    }
+
     require('mason-tool-installer').setup {
       ensure_installed = {
+        'ruff',
+
         -- LSP
         'pyright',
-        'tsserver',
+        'ts_ls',
         'lua-language-server',
+        'ruff-lsp',
 
         -- Linters
         'eslint_d',

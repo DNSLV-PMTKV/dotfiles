@@ -1,14 +1,15 @@
 return {
-  'olimorris/onedarkpro.nvim',
+  -- 'olimorris/onedarkpro.nvim',
+  'navarasu/onedark.nvim',
   priority = 1000,
   config = function()
-    require('onedarkpro').setup {
-      options = {
-        cursorline = true,
-      },
-      plugins = {
-        nvim_tree = false,
-        telescope = false,
+    require('onedark').setup {
+      code_style = {
+        comments = 'none',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'none',
       },
     }
     vim.cmd.colorscheme 'onedark'

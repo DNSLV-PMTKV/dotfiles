@@ -5,6 +5,11 @@ local opts = { noremap = true, silent = true }
 
 keymap('n', '<leader>a', 'ggVG')
 
+-- Add undo break-points
+keymap('i', ',', ',<c-g>u', opts)
+keymap('i', '.', '.<c-g>u', opts)
+keymap('i', ';', ';<c-g>u', opts)
+
 -- Navigate windows
 keymap('n', '<C-h>', '<C-w>h', opts)
 keymap('n', '<C-j>', '<C-w>j', opts)
@@ -14,6 +19,14 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 -- Navigate buffers
 keymap('n', '<S-l>', ':BufferLineCycleNext<CR>', opts)
 keymap('n', '<S-h>', ':BufferLineCyclePrev<CR>', opts)
+
+-- Close buffers
+vim.api.nvim_set_keymap(
+  'n',
+  '<C-w>',
+  ':Bdelete<CR>',
+  { noremap = true, nowait = true, silent = true }
+)
 
 -- Resize windows with arrows
 keymap('n', '<C-Up>', ':resize -2<CR>', opts)
@@ -46,6 +59,9 @@ keymap('v', 'p', 'pgvy', opts)
 
 -- Delete whole word with backspace
 keymap('i', '<C-H>', '<C-W>', opts)
+
+-- Format document
+keymap('n', '<C-f>', ':lua vim.lsp.buf.format { async = true }<CR>', opts)
 
 -- better indenting
 keymap('v', '<', '<gv', opts)

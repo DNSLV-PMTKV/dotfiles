@@ -1,38 +1,61 @@
 return {
   'nvim-telescope/telescope.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-tree/nvim-web-devicons',
+    'folke/todo-comments.nvim',
+  },
   config = function()
+    local telescope = require 'telescope'
     local actions = require 'telescope.actions'
+
     local keymap = vim.keymap.set
-    local opts = { noremap = true, silent = true }
+    local function opts(desc)
+      return {
+        desc = 'Telescope: ' .. desc,
+        noremap = true,
+        silent = true,
+        nowait = true,
+      }
+    end
 
     keymap(
       'n',
       '<C-p>',
       ':Telescope find_files hidden=true no_ignore=true<CR>',
-      opts
+      opts 'Find files'
     )
-    keymap('n', '<leader>f', ':Telescope live_grep<CR>', opts)
-    keymap('n', '<leader>r', ':Telescope resume<CR>', opts)
-    keymap('n', '<leader>b', ':Telescope buffers <CR>', opts)
-    keymap('n', '<leader>/', ':Telescope current_buffer_fuzzy_find <CR>', opts)
-    keymap('n', '<leader>gr', ':Telescope lsp_references<CR>', opts)
+    keymap('n', '<leader>f', ':Telescope live_grep<CR>', opts 'Live grep')
+    keymap('n', '<leader>R', ':Telescope resume<CR>', opts 'Resume')
+    keymap('n', '<leader>b', ':Telescope buffers <CR>', opts 'Buffers')
+    keymap('n', '<leader>t', '<cmd>TodoTelescope<cr>', opts 'Find todos')
+    keymap(
+      'n',
+      '<leader>/',
+      ':Telescope current_buffer_fuzzy_find <CR>',
+      opts 'Current buffer fuzyz find'
+    )
+    keymap(
+      'n',
+      '<leader>gr',
+      ':Telescope lsp_references<CR>',
+      opts 'Lsp references'
+    )
 
-    require('telescope').setup {
+    telescope.setup {
       defaults = {
         mappings = {
           i = {
             ['esc'] = actions.close,
+            ['<C-k>'] = actions.move_selection_previous,
+            ['<C-j>'] = actions.move_selection_next,
           },
         },
         prompt_prefix = ' ',
         selection_caret = ' ',
-        path_display = { 'absolute' },
+        path_display = { 'smart' },
         file_ignore_patterns = {
           '__pycache__',
-          'lazy-lock.json',
-          '*-lock',
-          '*-lock.yaml',
           'htmlcov',
           'media',
           'static',
@@ -44,6 +67,7 @@ return {
           'android',
           'ios',
           '.expo',
+          'vendor',
         },
         sorting_strategy = 'ascending',
         layout_config = {
