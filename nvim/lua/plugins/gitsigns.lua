@@ -1,83 +1,35 @@
 return {
   'lewis6991/gitsigns.nvim',
-  config = function()
-    local keymap = vim.keymap.set
-    local opts = { noremap = true, silent = true }
+  event = { 'BufReadPre', 'BufNewFile' },
+  opts = {
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
 
-    keymap('n', '<leader>hb', ':Gitsign toggle_current_line_blame<CR>', opts)
-    keymap('n', '<leader>hB', ':Gitsign blame_line<CR>', opts)
-    keymap('n', '<leader>hp', ':Gitsign preview_hunk<CR>', opts)
-    keymap('n', '<leader>hd', ':Gitsign diffthis<CR>', opts)
-    keymap('n', '<leader>hr', ':Gitsign reset_hunk<CR>', opts)
-    keymap('v', '<leader>hr', ':Gitsign reset_hunk<CR>', opts)
+      local function opts(desc)
+        return {
+          desc = desc,
+          buffer = bufnr,
+          noremap = true,
+          silent = true,
+          nowait = true,
+        }
+      end
 
-    require('gitsigns').setup {
-      signs = {
-        add = {
-          hl = 'GitSignsAdd',
-          text = '▎',
-          numhl = 'GitSignsAddNr',
-          linehl = 'GitSignsAddLn',
-        },
-        change = {
-          hl = 'GitSignsChange',
-          text = '▎',
-          numhl = 'GitSignsChangeNr',
-          linehl = 'GitSignsChangeLn',
-        },
-        delete = {
-          hl = 'GitSignsDelete',
-          text = '►',
-          numhl = 'GitSignsDeleteNr',
-          linehl = 'GitSignsDeleteLn',
-        },
-        topdelete = {
-          hl = 'GitSignsDelete',
-          text = '►',
-          numhl = 'GitSignsDeleteNr',
-          linehl = 'GitSignsDeleteLn',
-        },
-        changedelete = {
-          hl = 'GitSignsChange',
-          text = '▎',
-          numhl = 'GitSignsChangeNr',
-          linehl = 'GitSignsChangeLn',
-        },
-      },
-      signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-      numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-      word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-      watch_gitdir = {
-        interval = 1000,
-        follow_files = true,
-      },
-      attach_to_untracked = true,
-      current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-        delay = 1000,
-        ignore_whitespace = false,
-      },
-      current_line_blame_formatter_opts = {
-        relative_time = false,
-      },
-      sign_priority = 6,
-      update_debounce = 100,
-      status_formatter = nil, -- Use default
-      max_file_length = 40000,
-      preview_config = {
-        -- Options passed to nvim_open_win
-        border = 'single',
-        style = 'minimal',
-        relative = 'cursor',
-        row = 0,
-        col = 1,
-      },
-      yadm = {
-        enable = false,
-      },
-    }
-  end,
+      vim.keymap.set(
+        'n',
+        '<leader>hb',
+        gs.toggle_current_line_blame,
+        opts 'Toggle current line blame'
+      )
+
+      vim.keymap.set('n', '<leader>hB', function()
+        gs.blame_line { full = true }
+      end, opts 'Blame line')
+
+      vim.keymap.set('n', '<leader>hp', gs.preview_hunk, opts 'Preview hunk')
+      vim.keymap.set('n', '<leader>hd', gs.diffthis, opts 'Diff this')
+      vim.keymap.set('n', '<leader>hr', gs.reset_hunk, opts 'Reset hunk')
+      vim.keymap.set('v', '<leader>hr', gs.reset_hunk, opts 'Reset hunk')
+    end,
+  },
 }

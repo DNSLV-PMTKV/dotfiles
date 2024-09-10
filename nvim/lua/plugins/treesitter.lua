@@ -1,35 +1,18 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    -- build = ':TSUpdate',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      'windwp/nvim-ts-autotag',
       'axelvc/template-string.nvim',
     },
     config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = 'all',
+      local treesitter = require 'nvim-treesitter.configs'
 
-        sync_install = false,
-
+      treesitter.setup {
         auto_install = true,
-
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        autotag = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<enter>',
-            node_incremental = '<enter>',
-            scope_incremental = false,
-            node_decremental = '<bs>',
-          },
-        },
+        highlight = { enable = true, additional_vim_regex_highlighting = false },
+        indent = { enable = true },
       }
 
       require('template-string').setup {}

@@ -24,8 +24,47 @@ return {
         api.config.mappings.default_on_attach(bufnr)
 
         -- custom mappings
-        vim.keymap.set('n', '<c-b>', api.tree.toggle, opts 'Toggle')
-        vim.keymap.set('n', '?', api.tree.toggle_help, opts 'Help')
+        vim.keymap.set('n', '<CR>', api.node.open.edit, opts 'Open')
+        vim.keymap.set(
+          'n',
+          'h',
+          api.node.navigate.parent_close,
+          opts 'Close Directory'
+        )
+        vim.keymap.set(
+          'n',
+          '<C-v>',
+          api.node.open.vertical,
+          opts 'Open: Vertical Split'
+        )
+        vim.keymap.set(
+          'n',
+          '<C-x>',
+          api.node.open.horizontal,
+          opts 'Open: Horizontal Split'
+        )
+        vim.keymap.set('n', 'a', api.fs.create, opts 'Create')
+        vim.keymap.set('n', 'c', api.fs.copy.node, opts 'Copy')
+        vim.keymap.set('n', 'd', api.fs.remove, opts 'Delete')
+        vim.keymap.set('n', 'D', api.fs.trash, opts 'Trash')
+        vim.keymap.set('n', 'f', api.live_filter.start, opts 'Filter')
+        vim.keymap.set(
+          'n',
+          'gy',
+          api.fs.copy.absolute_path,
+          opts 'Copy Absolute Path'
+        )
+        vim.keymap.set('n', 'r', api.fs.rename, opts 'Rename')
+        vim.keymap.set('n', 'x', api.fs.cut, opts 'Cut')
+        vim.keymap.set('n', 'y', api.fs.copy.filename, opts 'Copy Name')
+        vim.keymap.set(
+          'n',
+          'Y',
+          api.fs.copy.relative_path,
+          opts 'Copy Relative Path'
+        )
+        vim.keymap.set('n', 'p', api.fs.paste, opts 'Paste')
+        vim.keymap.set('n', '<Tab>', api.node.open.preview, opts 'Open Preview')
       end
 
       require('nvim-tree').setup {

@@ -12,8 +12,8 @@ EOF
 }
 
 function copy_to_git {
-    rm -rf ./nvim/ && cp -r ~/.config/nvim/ .
-    rm -rf ./alacritty/ && cp -r ~/.config/alacritty/ .
+    rm -rf ./nvim/ && cp -r ~/.config/nvim/ ./nvim/
+    rm -rf ./alacritty/ && cp -r ~/.config/alacritty/ ./alacritty/
     cp ~/.tmux.conf .
 }
 

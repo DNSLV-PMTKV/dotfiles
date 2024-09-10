@@ -15,6 +15,22 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 keymap('n', '<S-l>', ':BufferLineCycleNext<CR>', opts)
 keymap('n', '<S-h>', ':BufferLineCyclePrev<CR>', opts)
 
+-- Better vertical movements
+keymap('n', '<C-u>', '<C-u>zz', opts)
+keymap('n', '<C-d>', '<C-d>zz', opts)
+keymap('n', 'n', 'nzzzv', opts)
+keymap('n', 'N', 'Nzzzv', opts)
+keymap('n', '}', '}zzzv', opts)
+keymap('n', '{', '{zzzv', opts)
+
+-- Close buffers
+vim.api.nvim_set_keymap(
+  'n',
+  '<C-w>',
+  ':Bdelete<CR>',
+  { noremap = true, nowait = true, silent = true }
+)
+
 -- Resize windows with arrows
 keymap('n', '<C-Up>', ':resize -2<CR>', opts)
 keymap('n', '<C-Down>', ':resize +2<CR>', opts)
@@ -40,12 +56,12 @@ keymap('n', '<Esc>', ':noh <CR>', opts)
 -- Vertical split
 keymap('n', '<C-\\>', '<Esc>:vs<CR>', opts)
 keymap('n', 'gv', ':vs | lua vim.lsp.buf.definition()<CR>', opts)
-keymap('n', 'gh', ':split | lua vim.lsp.buf.definition()<CR>', opts)
 
+keymap('n', 'gh', ':split | lua vim.lsp.buf.definition()<CR>', opts)
 keymap('v', 'p', 'pgvy', opts)
 
--- Delete whole word with backspace
-keymap('i', '<C-H>', '<C-W>', opts)
+-- Format document
+keymap('n', '<C-f>', ':lua vim.lsp.buf.format { async = true }<CR>', opts)
 
 -- better indenting
 keymap('v', '<', '<gv', opts)
