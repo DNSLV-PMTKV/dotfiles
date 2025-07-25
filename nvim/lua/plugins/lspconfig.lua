@@ -2,18 +2,12 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
+    'mason-org/mason.nvim',
     'hrsh7th/cmp-nvim-lsp',
     { 'antosha417/nvim-lsp-file-operations', config = true },
     { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require 'lspconfig'
-
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require 'mason-lspconfig'
-
-    -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
     local keymap = vim.keymap -- for conciseness
@@ -65,32 +59,121 @@ return {
         opts.desc = 'Go to next diagnostic'
         keymap.set('n', ']d', vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
-        opts.desc = 'Show documentation for what is under cursor'
-        keymap.set('n', 'K', vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+        vim.keymap.set('n', 'K', function()
+          vim.lsp.buf.hover {
+            border = 'rounded',
+          }
+        end, { desc = 'Show documentation for what is under cursor' })
 
-        opts.desc = 'Restart LSP'
-        keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+        keymap.set(
+          'n',
+          '<leader>rs',
+          ':LspRestart<CR>',
+          { desc = 'Restart LSP' }
+        ) -- mapping to restart lsp if necessary
       end,
     })
 
-    -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    local signs = {
-      DiagnosticSignError = ' ',
-      DiagnosticSignWarn = ' ',
-      DiagnosticSignHint = '󰠠 ',
-      DiagnosticSignInfo = ' ',
-    }
-    for type, icon in pairs(signs) do
-      vim.fn.sign_define(type, { text = icon, texthl = type, numhl = '' })
-    end
+    vim.lsp.config('lua_ls', {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          -- make the language server recognize "vim" global
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          completion = {
+            callSnippet = 'Replace',
+          },
+        },
+      },
+    })
+
+    vim.lsp.config('pyright', {
+      capabilities = capabilities,
+      settings = {
+        pyright = {
+          -- Using Ruff's import organizer
+          disableOrganizeImports = true,
+          analysis = {
+            diagnosticSeverityOverrides = {
+              reportGeneralTypeIssues = 'none',
+              reportOptionalMemberAccess = 'none',
+              reportOptionalSubscript = 'none',
+              reportPrivateImportUsage = 'none',
+              reportUnboundVariable = 'none',
+              reportOptionalContextManager = 'none',
+              reportUnusedVariable = 'none',
+            },
+          },
+        },
+        python = {
+          analysis = {
+            -- Ignore all files for analysis to exclusively use Ruff for linting
+            ignore = { '*' },
+            autoSearchPaths = true,
+            diagnosticMode = 'file',
+            useLibraryCodeForTypes = true,
+            typeCheckingMode = 'off',
+            autoImportCompletions = true,
+            diagnosticSeverityOverrides = {
+              reportGeneralTypeIssues = 'none',
+              reportOptionalMemberAccess = 'none',
+              reportOptionalSubscript = 'none',
+              reportPrivateImportUsage = 'none',
+              reportUnboundVariable = 'none',
+              reportOptionalContextManager = 'none',
+              reportUnusedVariable = 'none',
+            },
+          },
+        },
+      },
+    })
+
+    vim.lsp.config('ts_ls', {
+      capabilities = capabilities,
+      settings = {
+        single_file_support = true,
+        typescript = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all';
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
+        javascript = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all';
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
+      },
+    })
+
+    vim.lsp.config('ruff', { capabilities = capabilities })
 
     vim.diagnostic.config {
       virtual_text = false,
       signs = {
-        active = signs,
+        text = {
+          [vim.diagnostic.severity.ERROR] = ' ',
+          [vim.diagnostic.severity.WARN] = ' ',
+          [vim.diagnostic.severity.INFO] = '󰋼 ',
+          [vim.diagnostic.severity.HINT] = '󰌵 ',
+        },
+        numhl = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.HINT] = '',
+          [vim.diagnostic.severity.INFO] = '',
+        },
       },
       update_in_insert = false,
       underline = true,
@@ -104,115 +187,16 @@ return {
       },
     }
 
-    vim.lsp.handlers['textDocument/hover'] =
-      vim.lsp.with(vim.lsp.handlers.hover, {
-        border = 'rounded',
-        focusable = true,
-      })
+    -- vim.lsp.handlers['textDocument/hover'] =
+    --   vim.lsp.with(vim.lsp.handlers.hover, {
+    --     border = 'rounded',
+    --     focusable = true,
+    --   })
 
     vim.lsp.handlers['textDocument/signatureHelp'] =
       vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = 'rounded',
         width = 60,
       })
-
-    mason_lspconfig.setup_handlers {
-      -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup {
-          capabilities = capabilities,
-        }
-      end,
-      ['lua_ls'] = function()
-        -- configure lua server (with special settings)
-        lspconfig['lua_ls'].setup {
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              -- make the language server recognize "vim" global
-              diagnostics = {
-                globals = { 'vim' },
-              },
-              completion = {
-                callSnippet = 'Replace',
-              },
-            },
-          },
-        }
-      end,
-      ['pyright'] = function()
-        lspconfig['pyright'].setup {
-          capabilities = capabilities,
-          settings = {
-            pyright = {
-              -- Using Ruff's import organizer
-              disableOrganizeImports = true,
-              analysis = {
-                diagnosticSeverityOverrides = {
-                  reportGeneralTypeIssues = 'none',
-                  reportOptionalMemberAccess = 'none',
-                  reportOptionalSubscript = 'none',
-                  reportPrivateImportUsage = 'none',
-                  reportUnboundVariable = 'none',
-                  reportOptionalContextManager = 'none',
-                  reportUnusedVariable = 'none',
-                },
-              },
-            },
-            python = {
-              analysis = {
-                -- Ignore all files for analysis to exclusively use Ruff for linting
-                ignore = { '*' },
-                autoSearchPaths = true,
-                diagnosticMode = 'file',
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = 'off',
-                autoImportCompletions = true,
-                diagnosticSeverityOverrides = {
-                  reportGeneralTypeIssues = 'none',
-                  reportOptionalMemberAccess = 'none',
-                  reportOptionalSubscript = 'none',
-                  reportPrivateImportUsage = 'none',
-                  reportUnboundVariable = 'none',
-                  reportOptionalContextManager = 'none',
-                  reportUnusedVariable = 'none',
-                },
-              },
-            },
-          },
-        }
-      end,
-      ['ts_ls'] = function()
-        lspconfig['ts_ls'].setup {
-          capabilities = capabilities,
-          settings = {
-            single_file_support = true,
-            typescript = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = true,
-            },
-            javascript = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = true,
-            },
-          },
-        }
-      end,
-      ['ruff_lsp'] = function()
-        lspconfig['ruff_lsp'].setup {
-          capabilities = capabilities,
-        }
-      end,
-    }
   end,
 }

@@ -33,3 +33,5 @@ opt.updatetime = 100
 
 opt.splitright = true
 opt.splitbelow = true
+
+vim.o.winborder = 'rounded'

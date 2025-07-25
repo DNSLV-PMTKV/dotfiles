@@ -15,10 +15,12 @@
 return {
   'zbirenbaum/copilot.lua',
   event = 'InsertEnter',
+  enabled = false,
   opts = {
     suggestion = {
-      auto_trigger = true,
+      auto_trigger = false,
       keymap = {
+        open = '<M-\\>',
         accept = '<C-l>',
         accept_line = '<M-l>',
         accept_word = '<M-k>',

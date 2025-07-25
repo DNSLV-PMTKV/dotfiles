@@ -42,6 +42,7 @@ style = "Regular"
 bindings = [
   { key = "N", mods = "Command", action = "ReceiveChar" },
   { key = "W", mods = "Command", action = "ReceiveChar" },
+  { key = "T", mods = "Command", action = "ReceiveChar" },
   { key = "F10", action = "ToggleFullScreen" },
 ]
 

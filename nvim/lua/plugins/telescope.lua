@@ -7,7 +7,6 @@ return {
   },
   config = function()
     local telescope = require 'telescope'
-    local actions = require 'telescope.actions'
 
     local keymap = vim.keymap.set
     local function opts(desc)
@@ -25,6 +24,7 @@ return {
       ':Telescope find_files hidden=true no_ignore=true<CR>',
       opts 'Find files'
     )
+    keymap('n', '<leader>fg', ':Telescope git_files<CR>', opts 'Git files')
     keymap('n', '<leader>fr', ':Telescope oldfiles<CR>', opts 'Recent files')
     keymap('n', '<leader>ff', ':Telescope live_grep<CR>', opts 'Live grep')
     keymap('n', '<leader>fb', ':Telescope buffers <CR>', opts 'Buffers')
@@ -45,13 +45,8 @@ return {
 
     telescope.setup {
       defaults = {
-        mappings = {
-          i = {
-            ['esc'] = actions.close,
-            ['<C-k>'] = actions.move_selection_previous,
-            ['<C-j>'] = actions.move_selection_next,
-          },
-        },
+        -- TODO: PLS FIX
+        border = false,
         path_display = { 'smart' },
         sorting_strategy = 'ascending',
         layout_config = { prompt_position = 'top' },
