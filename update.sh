@@ -14,6 +14,9 @@ EOF
 function copy_to_git {
     rm -rf ./nvim/ && cp -r ~/.config/nvim/ ./nvim/
     rm -rf ./alacritty/ && cp -r ~/.config/alacritty/ ./alacritty/
+    cp ~/.zshrc .
+    cp ~/.aliases .
+    cp ~/.gitconfig .
     cp ~/.tmux.conf .
 }
 
@@ -21,6 +24,10 @@ function copy_to_local {
     cp -r ./nvim/ ~/.config/
     cp -r ./alacritty/ ~/.config/
     cp ./.tmux.conf ~/.tmux.conf 
+    cp ./.aliases ~/.aliases
+    cp ./.gitconfig ~/.gitconfig
+    cp ./.zshrc ./.zshrc
+
 }
 
 if [ $# -ne 2 ]; then

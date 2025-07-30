@@ -1,0 +1,9 @@
+[user]
+	name = Danislav Pometkov
+	email = pometkov.d@protonmail.com
+
+[core]
+	editor = nvim
+
+[pull]
+  rebase = true
