@@ -2,7 +2,7 @@ local opt = vim.opt
 
 opt.number = true
 opt.relativenumber = true
-opt.signcolumn = 'yes'
+opt.signcolumn = 'yes:1'
 opt.cursorline = true
 
 opt.backspace = 'indent,eol,start'
@@ -12,6 +12,8 @@ opt.mouse:append 'a'
 opt.scrolloff = 7
 opt.sidescrolloff = 7
 
+opt.hlsearch = true
+opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 
@@ -20,7 +22,6 @@ opt.background = 'dark'
 
 opt.swapfile = false
 opt.autoread = true
-vim.bo.autoread = true
 
 opt.expandtab = true
 opt.tabstop = 2
@@ -35,3 +36,6 @@ opt.splitright = true
 opt.splitbelow = true
 
 vim.o.winborder = 'rounded'
+
+-- No automatic comment insertion
+vim.cmd [[autocmd FileType * set formatoptions-=ro]]

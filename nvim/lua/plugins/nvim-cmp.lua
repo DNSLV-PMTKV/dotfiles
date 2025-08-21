@@ -63,12 +63,7 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert {
-        -- ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
-        -- ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
-        -- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(), -- show completion suggestions
-        -- ['<C-e>'] = cmp.mapping.abort(), -- close completion window
         ['<CR>'] = cmp.mapping.confirm { select = false },
 
         ['<Tab>'] = cmp.mapping(function(fallback)
@@ -98,6 +93,10 @@ return {
       },
 
       window = {
+        completion = {
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          scrolloff = 3,
+        },
         documentation = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
         },
@@ -114,19 +113,8 @@ return {
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         fields_ = { 'kind', 'abbr', 'menu' },
-        -- format = function(entry, vim_item)
-        --   -- Kind icons
-        --   vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
-        --   vim_item.menu = ({
-        --     nvim_lsp = '[LSP]',
-        --     buffer = '[Buffer]',
-        --     path = '[Path]',
-        --   })[entry.source.name]
-        --   return vim_item
-        -- end,
         format = lspkind.cmp_format {
           before = function(entry, vim_item)
-            -- Kind icons
             vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
             vim_item.menu = ({
               nvim_lsp = '[LSP]',

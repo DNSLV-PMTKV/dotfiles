@@ -45,10 +45,8 @@ return {
 
     telescope.setup {
       defaults = {
-        -- TODO: PLS FIX
-        border = false,
-        path_display = { 'smart' },
         sorting_strategy = 'ascending',
+        path_display = { 'filename_first' },
         layout_config = { prompt_position = 'top' },
         file_ignore_patterns = {
           '__pycache__',
@@ -64,6 +62,7 @@ return {
           'ios',
           '.expo',
           'vendor',
+          '.ruff_cache',
         },
       },
     }

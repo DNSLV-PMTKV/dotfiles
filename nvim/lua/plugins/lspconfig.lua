@@ -59,11 +59,8 @@ return {
         opts.desc = 'Go to next diagnostic'
         keymap.set('n', ']d', vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
-        vim.keymap.set('n', 'K', function()
-          vim.lsp.buf.hover {
-            border = 'rounded',
-          }
-        end, { desc = 'Show documentation for what is under cursor' })
+        opts.desc = 'Show documentation for what is under cursor'
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
         keymap.set(
           'n',
@@ -186,12 +183,6 @@ return {
         prefix = '',
       },
     }
-
-    -- vim.lsp.handlers['textDocument/hover'] =
-    --   vim.lsp.with(vim.lsp.handlers.hover, {
-    --     border = 'rounded',
-    --     focusable = true,
-    --   })
 
     vim.lsp.handlers['textDocument/signatureHelp'] =
       vim.lsp.with(vim.lsp.handlers.signature_help, {

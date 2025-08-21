@@ -66,3 +66,7 @@ keymap('n', '<C-f>', ':lua vim.lsp.buf.format { async = true }<CR>', opts)
 -- better indenting
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
+
+-- disable recording macros
+keymap('n', 'q', '<Nop>', opts)
+keymap('n', 'Q', '<Nop>', opts)
