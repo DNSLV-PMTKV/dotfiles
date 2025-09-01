@@ -23,6 +23,9 @@ keymap('n', 'N', 'Nzzzv', opts)
 keymap('n', '}', '}zzzv', opts)
 keymap('n', '{', '{zzzv', opts)
 
+-- New buffer
+keymap('n', '<leader>N', ':enew<CR>', opts)
+
 -- Close buffers
 vim.api.nvim_set_keymap(
   'n',

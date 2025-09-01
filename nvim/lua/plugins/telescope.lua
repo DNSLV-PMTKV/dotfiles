@@ -24,10 +24,10 @@ return {
       ':Telescope find_files hidden=true no_ignore=true<CR>',
       opts 'Find files'
     )
+    keymap('n', '<C-b>', ':Telescope buffers <CR>', opts 'Buffers')
     keymap('n', '<leader>fg', ':Telescope git_files<CR>', opts 'Git files')
     keymap('n', '<leader>fr', ':Telescope oldfiles<CR>', opts 'Recent files')
     keymap('n', '<leader>ff', ':Telescope live_grep<CR>', opts 'Live grep')
-    keymap('n', '<leader>fb', ':Telescope buffers <CR>', opts 'Buffers')
     keymap('n', '<leader>ft', '<cmd>TodoTelescope<cr>', opts 'Find todos')
     keymap('n', '<leader>R', ':Telescope resume<CR>', opts 'Resume')
     keymap(

@@ -12,7 +12,7 @@ return {
       show_close_icon = false,
       show_tab_indicators = true,
       persist_buffer_sort = true,
-      enforce_regular_tabs = false,
+      enforce_regular_tabs = true,
       always_show_bufferline = true,
       diagnostics = 'nvim_lsp',
       sort_by = 'insert_at_end',

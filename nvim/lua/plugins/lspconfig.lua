@@ -60,7 +60,7 @@ return {
         keymap.set('n', ']d', vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
         opts.desc = 'Show documentation for what is under cursor'
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
         keymap.set(
           'n',
@@ -183,11 +183,5 @@ return {
         prefix = '',
       },
     }
-
-    vim.lsp.handlers['textDocument/signatureHelp'] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = 'rounded',
-        width = 60,
-      })
   end,
 }
