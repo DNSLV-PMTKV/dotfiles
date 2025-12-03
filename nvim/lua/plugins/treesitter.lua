@@ -1,21 +1,24 @@
 return {
-  {
-    'nvim-treesitter/nvim-treesitter',
-    -- build = ':TSUpdate',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'axelvc/template-string.nvim',
-    },
-    config = function()
-      local treesitter = require 'nvim-treesitter.configs'
-
-      treesitter.setup {
-        auto_install = true,
-        highlight = { enable = true, additional_vim_regex_highlighting = false },
-        indent = { enable = true },
-      }
-
-      require('template-string').setup {}
-    end,
+  'nvim-treesitter/nvim-treesitter',
+  lazy = false,
+  dependencies = {
+    'axelvc/template-string.nvim',
   },
+  branch = 'main',
+  build = ':TSUpdate',
+  config = function()
+    local treesitter = require 'nvim-treesitter'
+
+    treesitter.setup {
+      install_dir = vim.fn.stdpath 'data' .. '/site',
+
+      auto_install = true,
+      highlight = { enable = true, additional_vim_regex_highlighting = false },
+      indent = { enable = true },
+    }
+
+    treesitter.install { 'javascript', 'typescript', 'tsx', 'python' }
+
+    require('template-string').setup {}
+  end,
 }

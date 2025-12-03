@@ -42,6 +42,14 @@ return {
       ':Telescope lsp_references<CR>',
       opts 'Lsp references'
     )
+    vim.keymap.set('n', '<space>fb', ':Telescope file_browser<CR>')
+
+    -- open file_browser with the path of the current buffer
+    vim.keymap.set(
+      'n',
+      '<space>fb',
+      ':Telescope file_browser path=%:p:h select_buffer=true<CR>'
+    )
 
     telescope.setup {
       defaults = {
@@ -63,6 +71,7 @@ return {
           '.expo',
           'vendor',
           '.ruff_cache',
+          '.venv',
         },
       },
     }
