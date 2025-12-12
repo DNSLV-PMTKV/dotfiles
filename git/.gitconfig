@@ -1,6 +1,7 @@
 [user]
 	name = Danislav Pometkov
 	email = pometkov.d@protonmail.com
+	signingkey = AF359A60AAAAD2AD
 
 [core]
 	editor = nvim
@@ -15,5 +16,11 @@
 	c = commit --verbose
 
 [credential]
-	helper = /usr/local/bin/git-credential-manager
 	credentialStore = gpg
+	helper = /usr/local/bin/git-credential-manager
+
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgSign = true
