@@ -1,0 +1,19 @@
+[user]
+	name = Danislav Pometkov
+	email = pometkov.d@protonmail.com
+
+[core]
+	editor = nvim
+
+[pull]
+  rebase = true
+
+[alias]
+	co = checkout
+	st = status
+	f = fetch
+	c = commit --verbose
+
+[credential]
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = gpg

@@ -18,7 +18,12 @@ return {
     }
 
     treesitter.install { 'javascript', 'typescript', 'tsx', 'python' }
-
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = { '<filetype>' },
+      callback = function()
+        vim.treesitter.start()
+      end,
+    })
     require('template-string').setup {}
   end,
 }
